@@ -1,1 +1,31 @@
+# import modules
+import random
+import string
+import tkinter as tk
+
+window = tk.Tk()
+window.title("Password Generator")
+window.geometry("300x200")
+
+length_label = tk.Label(window, text="Password Length")
+length_label.pack(pady=10)
+length = tk.IntVar()
+length.set(8)
+length_spin = tk.Spinbox(window, from_=4, to_=32, textvariable=length, width=15)
+length_spin.pack()
+
+password_label = tk.Label(window, text="")
+password_label.pack(pady=10)
+password_button = tk.Button(window, text="Generate Password")
+password_button.pack()
+
+def generate_password():
+    length_value = length.get()
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = "".join(random.choices(characters, k=length_value))
+    password_label.config(text=password)
+password_button.config(command=generate_password)
+
+window.mainloop()
+
 
